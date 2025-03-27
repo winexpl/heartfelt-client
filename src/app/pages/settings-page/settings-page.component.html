@@ -1,0 +1,27 @@
+<div class="settings-btn">
+    <button class="btn" (click)="navigateToEditProfile()">Редактировать профиль</button>
+</div>
+
+
+
+@if(isOpenFormForEditPassword) {
+    <div class="settings-btn">
+        <app-edit-password-modal></app-edit-password-modal>
+    </div>
+}
+
+<div class="settings-btn">
+    <button class="btn" (click)="navigateToEditPassword()">
+        {{ isOpenFormForEditPassword? 'Закрыть форму без изменений': 'Изменить пароль' }}
+    </button>
+</div>
+
+@if(authService.roles.includes(Role.SUFFERY)) {
+    <div class="settings-btn">
+        <button class="btn">Стать психологом</button>
+    </div>    
+}
+
+<div class="settings-btn">
+    <button class="btn" (click)="logout()">Выход</button>
+</div>

@@ -1,0 +1,43 @@
+.register-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--background-secondary-color);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-eye-btn {
+  background: none;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+  top: 30%;
+  right: 3%;
+}
+
+.login-reg {
+  display: inline-block;
+  font-size: 14px;
+  color: #666; /* Цвет текста */
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.login-reg-link {
+  color: #007bff; /* Синий цвет для ссылки */
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 5px; /* Отступ от текста "Нет аккаунта?" */
+  transition: color 0.3s ease; /* Плавное изменение цвета */
+}
+
+.login-reg-link:hover {
+  color: #0056b3; /* Темно-синий цвет при наведении */
+  text-decoration: underline; /* Подчеркивание при наведении */
+}

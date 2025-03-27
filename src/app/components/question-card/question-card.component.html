@@ -1,0 +1,22 @@
+<div class="card">
+    @if(authService.id == question.userId) {
+        <button class="delete-btn" (click)="deleteQuestion()">
+            <i class="fas fa-trash" style="color: var(--border-color);"></i>
+        </button>
+
+        <button class="edit-btn" (click)="editQuestion()">
+            <i class="fas fa-pencil-alt" style="color: var(--border-color);"></i>
+        </button>
+    }
+    @if(question.username && question.anonymous != true) {
+        <a class="username ml16" [href]=`${question.username}`>&#64;{{ question.username }}</a>
+    } @else {
+        <a class="username ml16">Анонимный вопрос</a>
+    }
+    <h1 class="question-card-title ml16">
+        <a [href]="'questions/' + question.id">{{ question.title }}</a>
+    </h1>
+    <p class="ml16">{{ question.text }}</p>
+    <p class="question-card-datetime mr16">{{ question.createdAt.toLocaleString() | date:'medium'}}</p>
+</div>
+

@@ -1,0 +1,36 @@
+.question-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 4px var(--border-color);
+    background-color: var(--green-color);
+}
+
+.question-card-title {
+    font-weight: bold;
+}
+
+.question-card-datetime {
+    font-size: 14px;
+    text-align: right;   
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--border-color);
+}
+
+.edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--border-color);
+}

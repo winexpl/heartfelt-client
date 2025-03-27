@@ -1,0 +1,40 @@
+@if(user$ | async; as user) {
+  <h1 class="profile-title">Профиль</h1>
+  <div class="profile-container">
+    <div class="profile">
+      <p><strong>Имя пользователя:</strong> {{ user.username }}</p>
+      <p><strong>Никнейм:</strong> {{ user.nickname }}</p>
+      <p><strong>О себе:</strong> {{ user.about || 'Информация отсутствует' }}</p>
+      <p><strong>Роль:</strong> {{ userService.getRolesDescription(user.role) }}</p>
+      <p><strong>Дата создания:</strong> {{ user.createdAt.toLocaleString() | date:'medium' }}</p>
+    </div>
+  </div>
+  @if(user.role.includes(Role.SUFFERY)) {
+    @if(questions$ | async; as questions) {
+      <div>
+        <h1 class="profile-title">Мои вопросы</h1>
+        @for(q of questions; track q.id) {
+          <app-question-card [question]="q"></app-question-card>
+        }
+        @empty {
+          <p class="no-content">У матросов нет вопросов</p>
+        }
+      </div>
+      }
+    }
+  @if(user.role.includes(Role.PSYCHOLOG)) {
+    @if(reviews$ | async; as reviews) {
+      <div>
+        <h1 class="profile-title">Отзывы</h1>
+        @for(r of reviews; track r.id) {
+          <p>{{r.text}}</p>
+        } @empty {
+          <p class="no-content">Отзывов пока что нет</p>
+        } 
+      </div>
+    }
+  }
+}
+
+
+

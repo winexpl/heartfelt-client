@@ -1,0 +1,17 @@
+<div class="answer-section">
+    @if(answer.psychologistId == authService.id) {
+        <button class="edit-btn" (click)="toggleEdit()">
+            <i class="fas fa-pencil-alt" style="color: var(--border-color);"></i>
+        </button>
+        <button class="delete-btn" (click)="deleteAnswer()">
+            <i class="fas fa-trash" style="color: var(--border-color);"></i>
+        </button>
+    }
+    <li class="no-marker"><a class="username" [href]=`${answer.username}`>&#64;{{ answer.username }}</a></li>
+    @if(!isEditMode()) {
+        <p>{{ answer.text }}</p>
+    } @else {
+        <input class="input" [value]="answer.text" (keydown.enter)="onEnter($event)" />
+    }
+    <p class="date">{{ answer.createdAt.toLocaleString() | date:'medium' }}</p>
+</div>

@@ -1,0 +1,50 @@
+<div class="question-edit-form">
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+        <label class="tt-control-label">
+            Заголовок вопроса:
+            <input 
+                class="tt-input mt8" 
+                type="title" 
+                formControlName="title" 
+                placeholder="Введите заголовок вопроса"
+            />
+        </label>
+        <div class="error-container mb16">
+            @if (questionForm.get('title')?.invalid) {
+                <small class="error" *ngIf="questionForm.get('title')?.errors?.['required']">
+                    Введите заголовок
+                </small>
+            }
+        </div>
+        
+        <label class="tt-control-label mb16">
+            Текст вопроса:
+            <textarea 
+                class="tt-input mt8 h100" 
+                formControlName="text" 
+                placeholder="Расскажите о своей проблеме"
+                (keydown)="handleTab($event)">
+            </textarea>
+        </label>
+        <label class="tt-control-label mb16">
+            Анонимно?
+            <input 
+                type="checkbox"
+                formControlName="anonymous" 
+                [value]="isAnonymous()">
+        </label>
+        
+        <button 
+            type="submit" 
+            class="btn mb16" 
+            [disabled]="!questionForm.valid">
+            Сохранить
+        </button>
+        <button 
+        type="button"
+        class="btn" 
+        (click)="onCancel()">
+            Отмена
+        </button>
+    </form>
+</div>

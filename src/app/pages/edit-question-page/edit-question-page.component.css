@@ -1,0 +1,13 @@
+.question-edit-form {
+    max-width: 900px;
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--background-secondary-color);
+}
+
+.h100 {
+    height: 100px;
+    resize: vertical; /* Разрешить изменение высоты */
+}
+
+

@@ -1,0 +1,32 @@
+.answer-section {
+    position: relative;
+    border: none;
+    border-color: var(--border-color);
+    width:100%;
+    background-color: var(--background-secondary-color);
+    text-align: left;
+    padding: 0px 10px;
+    width: calc(100% - 20px);
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--border-color);
+}
+
+.edit-btn {
+    position: absolute;
+    top: 8px;
+    right: 48px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--border-color);
+}

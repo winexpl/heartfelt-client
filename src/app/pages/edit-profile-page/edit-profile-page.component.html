@@ -1,0 +1,18 @@
+<div class="profile-edit-form">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <label class="tt-control-label mb16">
+            Имя пользователя:
+            <input class="tt-input mt8" type="text" formControlName="username" placeholder="Введите имя пользователя" />
+        </label>
+        <label class="tt-control-label mb16">
+            Никнейм:
+            <input class="tt-input mt8" type="text" formControlName="nickname" placeholder="Введите никнейм" />
+        </label>
+        <label class="tt-control-label mb16">
+            О себе:
+            <textarea class="tt-input mt8" formControlName="about" placeholder="Расскажите о себе"></textarea>
+        </label>
+      <button type="submit" class="btn mb16" [disabled]="!profileForm.valid">Сохранить</button>
+      <button type="button" class="btn" (click)="onCancel()">Отмена</button>
+    </form>
+</div>

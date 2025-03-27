@@ -1,0 +1,5 @@
+@if(claims$ | async; as claims) {
+    @for(claim of claims; track claim.id) {
+        <app-claim-card [claim]="claim"></app-claim-card>
+    }
+}

@@ -1,0 +1,7 @@
+.profile-edit-form {
+    max-width: 500px;
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--background-secondary-color);
+}
+

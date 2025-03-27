@@ -1,0 +1,60 @@
+<form 
+    class="register-form" 
+    [formGroup]="form"
+    (ngSubmit)="onSubmit($event)"    
+>
+    <h1 class="h1 mb60">Регистрация</h1>
+
+    <label class="tt-control-label mb16">
+        Логин
+        <input 
+            formControlName="username"
+            class="tt-input mt8" 
+            type="text" 
+            placeholder="Введите логин">
+    </label>
+
+    <label class="tt-control-label mb16">
+        Пароль
+        <div class="password-input">
+            <input 
+                formControlName="password"
+                class="tt-input mt8" 
+                [type]="showPassword() ? 'text' : 'password'" 
+                placeholder="Введите пароль">
+            <button 
+                type="button" 
+                (click)="showPassword.set(!showPassword())" 
+                class="password-eye-btn">
+                <span class="material-icons">
+                    {{ showPassword() ? 'visibility_off' : 'visibility' }}
+                </span>
+            </button>
+        </div>
+    </label>
+
+    <label class="tt-control-label mb32">
+        Подтвердите пароль
+        <div class="password-input">
+            <input 
+                formControlName="confirmPassword"
+                class="tt-input mt8" 
+                [type]="showConfirmPassword() ? 'text' : 'password'" 
+                placeholder="Подтвердите пароль">
+            <button 
+                type="button" 
+                (click)="showConfirmPassword.set(!showConfirmPassword())" 
+                class="password-eye-btn">
+                <span class="material-icons">
+                    {{ showConfirmPassword() ? 'visibility_off' : 'visibility' }}
+                </span>
+            </button>
+        </div>
+    </label>
+
+    <button class="btn" type="submit">Зарегистрироваться</button>
+
+    <label class="login-reg">Есть аккаунт?
+        <a href="/login" class="login-reg-link">Войти!</a>
+    </label>
+</form>

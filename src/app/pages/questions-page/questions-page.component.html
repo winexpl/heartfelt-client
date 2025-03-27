@@ -1,0 +1,19 @@
+@if(authService.roles.includes(Role.SUFFERY)) {
+    <div class="ask-btn">
+        <button class="btn" (click)="navigateToCreateQuestion()">Задать вопрос</button>
+    </div>
+}
+
+<div class="m8">
+    <input class="input" type="search" placeholder="Введите текст" (keydown.enter)="onEnter($event)">
+</div>
+
+<div class="questions-list__wrapper">
+    <div class="questions-list">
+        @if(questions$| async; as questions) {
+            @for (q of questions; track q.id) {
+                <app-question-card [question]=q></app-question-card>
+            }
+        }
+    </div>
+</div>

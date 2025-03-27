@@ -1,0 +1,25 @@
+.qa-card {
+    display: block;
+    padding: 0px 16px 0px 16px;
+}
+
+.h100 {
+    height: 50px;
+}
+
+
+.question-section {
+    border: none;
+    border-color: var(--border-color);
+    width:100%;
+    background-color: var(--background-secondary-color);
+    text-align: left;
+    padding: 0px 10px;
+    width: calc(100% - 20px);
+}
+
+.qa-title {
+    font-size: 24px;
+    text-align: center;
+}
+

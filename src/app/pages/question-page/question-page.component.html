@@ -1,0 +1,36 @@
+@if(question$ | async; as question ) {
+    <div class="qa-card">
+        <div class="question-section">
+            <p class="username"><strong>{{ question.anonymous || question.username==null ? 'Анонимно' : question.username }}</strong></p>
+            <p class="qa-title"><strong>{{ question.title }}</strong></p>
+            <p>{{ question.text }}</p>
+            <p class="date">{{ question.createdAt.toLocaleString() | date:'medium' }}</p>
+        </div>
+    
+        @if(authService.roles.includes(Role.PSYCHOLOG)) {
+            <form [formGroup]="textForm" (ngSubmit)="onSubmit()">
+                <textarea 
+                    class="tt-input h100 mb16"
+                    formControlName="text"
+                    placeholder="Введите ваш ответ"></textarea>
+                <button 
+                    class="btn"
+                    type="submit">
+                    Ответить
+                </button>
+            </form>            
+        }
+        @if(answers$ | async; as answers) {
+            <p class="qa-title"><strong>Ответы:</strong></p>
+            @for(answer of answers; track answer.id) {
+               <app-answer-card [answer]="answer"></app-answer-card>
+            } @empty {
+                <div class="no-answer">
+                    <p>На данный момент ответа на этот вопрос нет.</p>
+                </div>
+            }
+        }
+    </div>
+}
+
+  

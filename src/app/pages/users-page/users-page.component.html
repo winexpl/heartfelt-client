@@ -1,0 +1,10 @@
+<div class="m8">
+    <input class="input" type="search" placeholder="Введите текст" (keydown.enter)="onEnter($event)">
+</div>
+
+  
+@if(users$ | async; as users) {
+    @for(u of users; track u.id) {
+        <app-profile-card [user]="u"></app-profile-card>
+    }
+}
