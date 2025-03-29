@@ -1,28 +1,28 @@
-<div class="answer-section">
-    @if(answer.psychologistId == authService.id) {
+<div class="review-section">
+    @if(review.senderId == authService.id) {
       <div class="action-buttons">
         <button class="action-button" (click)="toggleEdit()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button class="action-button" (click)="deleteAnswer()">
+        <button class="action-button" (click)="deleteReview()">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
     }
   
     <li class="no-marker">
-      <a class="username" [href]=`${answer.username}`>&#64;{{ answer.username }}</a>
+        <a class="username" [href]=`${review.senderUsername}`>&#64;{{ review.senderUsername }}</a>
     </li>
-  
+
     @if(!isEditMode()) {
-      <p class="answer-text">{{ answer.text }}</p>
+      <p class="review-text">{{ review.text }}</p>
     } @else {
       <mat-form-field class="edit-field mt8" appearance="outline">
         <mat-label>Измените текст</mat-label>
-        <input matInput [value]="answer.text" (keydown.enter)="onEnter($event)" />
+        <input matInput [value]="review.text" (keydown.enter)="onEnter($event)" />
       </mat-form-field>
     }
   
-    <p class="datetime">{{ answer.createdAt.toLocaleString() | date: 'medium' }}</p>
-  </div>
+    <p class="date">{{ review.createdAt.toLocaleString() | date: 'medium' }}</p>
+</div>
   

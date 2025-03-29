@@ -1,3 +1,36 @@
+.questions__wrapper {
+    padding: 16px;
+}
 .ask-btn {
-    margin: 8px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+
+.m8 {
+    margin: 16px 0;
+}
+
+.questions-list__wrapper {
+    margin-top: 24px;
+}
+
+.questions-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-card {
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.question-card:hover {
+    transform: scale(1.01);
+}
+
+.no-content {
+    text-align: center;
+    font-style: italic;
+    color: var(--secondary-color);
+    margin: 16px 0;
 }

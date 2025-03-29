@@ -1,10 +1,11 @@
-<div class="profile-container">
+<div class="profile-container" (click)="redirectToProfile()">
     <div class="card">
         <div class="profile">
-            <p class="nickname"><strong>{{ user.nickname }}</strong></p>
-            <a class="username" [href]=`${user.username}`>&#64;{{ user.username }}</a>
-            <p><strong>О себе:</strong> {{ user.about || 'Информация отсутствует' }}</p>
-            <p><strong>Роль:</strong> {{ userService.getRolesDescription(user.role) }}</p>
+        <p class="nickname"><strong>{{ user.nickname }}</strong></p>
+        <a class="username" [href]=`${user.username}`>&#64;{{ user.username }}</a>
+        <p><strong>О себе:</strong> {{ user.about || 'Информация отсутствует' }}</p>
+        <p><strong>Роль:</strong> {{ userService.getRolesDescription(user.role) }}</p>
         </div>
     </div>
 </div>
+  

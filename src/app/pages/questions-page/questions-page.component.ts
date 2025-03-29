@@ -6,10 +6,21 @@ import { Router } from '@angular/router';
 import { Answer } from '../../interfaces/answer.interface';
 import { AuthService } from '../../auth/auth.service';
 import { Role } from '../../interfaces/user.interface';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-questions-page',
-  imports: [CommonModule, QuestionCardComponent],
+  imports: [
+    CommonModule,
+    QuestionCardComponent,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
+  ],
   templateUrl: './questions-page.component.html',
   styleUrl: './questions-page.component.css'
 })

@@ -1,28 +1,28 @@
-import { Component, inject, Input, signal, effect } from '@angular/core';
-import { Answer } from '../../interfaces/answer.interface';
-import { CommonModule } from '@angular/common';
+import { Component, effect, inject, Input, signal } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { Answer } from '../../interfaces/answer.interface';
 import { AnswerService } from '../../services/answer.service';
+import { ReviewService } from '../../services/review.service';
+import { Review } from '../../interfaces/review.interface';
+import { CommonModule } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
 
 @Component({
-  selector: 'app-answer-card',
+  selector: 'app-review-card',
   imports: [
     CommonModule,
     MatFormField,
-    MatIcon,
     MatLabel,
-    MatInput
+    MatIcon
   ],
-  templateUrl: './answer-card.component.html',
-  styleUrls: ['./answer-card.component.css']
+  templateUrl: './review-card.component.html',
+  styleUrl: './review-card.component.css'
 })
-export class AnswerCardComponent {
-  @Input() answer!: Answer;
+export class ReviewCardComponent {
+  @Input() review!: Review;
   authService = inject(AuthService);
-  answerService = inject(AnswerService);
+  reviewService = inject(ReviewService);
 
   // Используем signal вместо обычной переменной
   isEditMode = signal(false);
@@ -38,8 +38,8 @@ export class AnswerCardComponent {
     const input = (event.target as HTMLInputElement).value; 
     this.isEditMode.set(false);
     if(input.length > 0) { 
-      this.answer.text = input;
-      this.answerService.updateAnswer(this.answer.id, this.answer).subscribe()
+      this.review.text = input;
+      this.reviewService.updateReview(this.review.id, this.review).subscribe()
     } 
   }
 
@@ -47,8 +47,8 @@ export class AnswerCardComponent {
     this.isEditMode.set(!this.isEditMode());
   }
 
-  deleteAnswer() {
-    this.answerService.deleteAnswer(this.answer.id).subscribe(
+  deleteReview() {
+    this.reviewService.deleteReview(this.review.id).subscribe(
       () => window.location.reload()
     )
   }

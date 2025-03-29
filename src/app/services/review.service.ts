@@ -20,4 +20,20 @@ export class ReviewService {
       })
   }
 
+  saveReview(review: any) {
+    return this.http.post<Review>(`${this.apiUrl}/reviews`,
+      review
+    )
+  }
+
+  updateReview(id: UUID | string, review: Review) {
+    return this.http.put<Review>(`${this.apiUrl}/reviews/${id}`,
+      review
+    )
+  }
+
+  deleteReview(id: UUID | string) {
+    return this.http.delete(`${this.apiUrl}/reviews/${id}`)
+  }
+
 }

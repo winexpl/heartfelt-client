@@ -1,27 +1,37 @@
-<div class="settings-btn">
-    <button class="btn" (click)="navigateToEditProfile()">Редактировать профиль</button>
-</div>
-
-
+<nav class="settings-menu">
+    <ul class="settings-list">
+      <li>
+        <button mat-button color="primary" (click)="navigateToEditProfile()">
+            {{ isOpenFormForEditProfile ? 'Закрыть форму без изменений' : 'Редактировать профиль' }}
+        </button>
+      </li>
+  
+      <li>
+        <button mat-button color="accent" (click)="navigateToEditPassword()">
+          {{ isOpenFormForEditPassword ? 'Закрыть форму без изменений' : 'Изменить пароль' }}
+        </button>
+      </li>
+  
+      @if(authService.roles.includes(Role.SUFFERY)) {
+        <li>
+          <button mat-button color="accent">Стать психологом</button>
+        </li>
+      }
+  
+      <li>
+        <button mat-button color="warn" (click)="logout()">Выход</button>
+      </li>
+    </ul>
+</nav>
 
 @if(isOpenFormForEditPassword) {
-    <div class="settings-btn">
-        <app-edit-password-modal></app-edit-password-modal>
-    </div>
+    <app-edit-password-modal></app-edit-password-modal>
 }
 
-<div class="settings-btn">
-    <button class="btn" (click)="navigateToEditPassword()">
-        {{ isOpenFormForEditPassword? 'Закрыть форму без изменений': 'Изменить пароль' }}
-    </button>
-</div>
 
-@if(authService.roles.includes(Role.SUFFERY)) {
-    <div class="settings-btn">
-        <button class="btn">Стать психологом</button>
-    </div>    
+@if(isOpenFormForEditProfile) {
+    <app-edit-profile-modal></app-edit-profile-modal>
 }
 
-<div class="settings-btn">
-    <button class="btn" (click)="logout()">Выход</button>
-</div>
+
+  

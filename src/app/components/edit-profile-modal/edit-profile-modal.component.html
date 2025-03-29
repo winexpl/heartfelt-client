@@ -1,0 +1,23 @@
+<div class="profile-edit-form">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-container">
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Имя пользователя</mat-label>
+        <input matInput type="text" formControlName="username" placeholder="Введите имя пользователя" />
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Никнейм</mat-label>
+        <input matInput type="text" formControlName="nickname" placeholder="Введите никнейм" />
+      </mat-form-field>
+  
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>О себе</mat-label>
+        <textarea matInput formControlName="about" placeholder="Расскажите о себе"></textarea>
+      </mat-form-field>
+  
+      <div class="button-group">
+        <button mat-raised-button type="submit" [disabled]="profileForm.invalid">Сохранить</button>
+      </div>
+    </form>
+  </div>
+  

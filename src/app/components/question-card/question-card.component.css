@@ -1,36 +1,74 @@
+.question-card {
+    position: relative;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
 .question-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 4px var(--border-color);
-    background-color: var(--green-color);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn {
+    border: none;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+.question-card-actions {
+    display: flex;
+    gap: 4px;
+    right: 16px;
+    position: absolute;
+}
+
+button mat-icon {
+    color: var(--border-color);
+    font-size: 30px; /* Размер иконки */
+    width: 30px; /* Ширина */
+    height: 30px; /* Высота */
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.question-card-user {
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.username {
+    text-decoration: none;
+    color: var(--hover-color);
+}
+
+.username:hover {
+    text-decoration: underline;
 }
 
 .question-card-title {
-    font-weight: bold;
-}
-
-.question-card-datetime {
-    font-size: 14px;
-    text-align: right;   
-}
-
-.delete-btn {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
+    margin: 8px 0;
     font-size: 20px;
     color: var(--border-color);
 }
 
-.edit-btn {
-    position: absolute;
-    top: 8px;
-    right: 48px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
+.question-card-title a {
+    text-decoration: none;
     color: var(--border-color);
+}
+
+.question-card-title a:hover {
+    color: var(--hover-color);
+}
+
+.question-card-text {
+    margin-bottom: 16px;
+    color: var(--border-color);
+    line-height: 1.6;
 }

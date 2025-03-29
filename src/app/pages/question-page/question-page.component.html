@@ -1,36 +1,37 @@
 @if(question$ | async; as question ) {
     <div class="qa-card">
-        <div class="question-section">
-            <p class="username"><strong>{{ question.anonymous || question.username==null ? 'Анонимно' : question.username }}</strong></p>
-            <p class="qa-title"><strong>{{ question.title }}</strong></p>
-            <p>{{ question.text }}</p>
-            <p class="date">{{ question.createdAt.toLocaleString() | date:'medium' }}</p>
-        </div>
-    
+        <!-- <div class="question-section">
+          <p class="username"><strong>{{ question.anonymous || question.username == null ? 'Анонимно' : question.username }}</strong></p>
+          <p class="qa-title"><strong>{{ question.title }}</strong></p>
+          <p class="qa-text">{{ question.text }}</p>
+          <p class="date">{{ question.createdAt.toLocaleString() | date: 'medium' }}</p>
+        </div> -->
+        <app-question-card [question]="question"></app-question-card>
+      
         @if(authService.roles.includes(Role.PSYCHOLOG)) {
-            <form [formGroup]="textForm" (ngSubmit)="onSubmit()">
-                <textarea 
-                    class="tt-input h100 mb16"
-                    formControlName="text"
-                    placeholder="Введите ваш ответ"></textarea>
-                <button 
-                    class="btn"
-                    type="submit">
-                    Ответить
-                </button>
-            </form>            
+          <form [formGroup]="textForm" (ngSubmit)="onSubmit()" class="answer-form">
+            <mat-form-field appearance="outline" class="answer-textarea">
+              <mat-label>Введите ваш ответ</mat-label>
+              <textarea matInput formControlName="text"></textarea>
+            </mat-form-field>
+            <button class="btn" type="submit">Ответить</button>
+          </form>
         }
+      
         @if(answers$ | async; as answers) {
-            <p class="qa-title"><strong>Ответы:</strong></p>
+          <p class="qa-title"><strong>Ответы:</strong></p>
+          <div class="answers-section">
             @for(answer of answers; track answer.id) {
-               <app-answer-card [answer]="answer"></app-answer-card>
+              <app-answer-card [answer]="answer" class="answer-card"></app-answer-card>
             } @empty {
-                <div class="no-answer">
-                    <p>На данный момент ответа на этот вопрос нет.</p>
-                </div>
+              <div class="no-answer">
+                <p>На данный момент ответа на этот вопрос нет.</p>
+              </div>
             }
+          </div>
         }
-    </div>
+      </div>
+      
 }
 
   

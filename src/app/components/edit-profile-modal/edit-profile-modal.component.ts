@@ -5,17 +5,24 @@ import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user.interface';
 import { Router } from '@angular/router';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-edit-profile-page',
+  selector: 'app-edit-profile-modal',
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton
   ],
-  templateUrl: './edit-profile-page.component.html',
-  styleUrl: './edit-profile-page.component.css'
+  templateUrl: './edit-profile-modal.component.html',
+  styleUrl: './edit-profile-modal.component.css'
 })
-export class EditProfilePageComponent {
+export class EditProfileModalComponent {
   authService = inject(AuthService)
   userService = inject(UserService)
   router = inject(Router)

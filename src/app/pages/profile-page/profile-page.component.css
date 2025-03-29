@@ -1,48 +1,65 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9fafc;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
-.profile-container {
-  align-items: center;
-  padding: 0px 10px;
+h1, h2 {
+  color: var(--primary-color);
+  margin-bottom: 16px;
+  text-align: left;
 }
 
-.profile {
-  max-width: 400px;
+.review-field {
   width: 100%;
 }
-
-.profile-title {
-  font-size: 26px;
-  padding: 10px;
-  font-weight: bold;
-  color: #333;
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 16px;
 }
 
-.edit-btn {
-  display: inline-block;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
+.profile-section, .questions-section, .reviews-section {
+  padding: 24px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 15px;
 }
 
-.edit-btn:hover {
-  background-color: #0056b3;
+.profile-details p, .questions-list p, .reviews-list p {
+  margin: 8px 0;
+  line-height: 1.5;
+  color: var(--border-color);
 }
 
 .no-content {
-  padding: 10px;
+  color: var(--secondary-color);
+  font-style: italic;
+  margin: 16px 0;
+}
+
+.questions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 8px;
+  }
+
+  app-question-card {
+    min-width: 100%;
+  }
 }

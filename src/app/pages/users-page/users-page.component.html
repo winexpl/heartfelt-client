@@ -1,5 +1,11 @@
 <div class="m8">
-    <input class="input" type="search" placeholder="Введите текст" (keydown.enter)="onEnter($event)">
+    <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Поиск</mat-label>
+        <input matInput type="search" placeholder="Введите текст" (keydown.enter)="onEnter($event)" />
+        <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
 </div>
 
   

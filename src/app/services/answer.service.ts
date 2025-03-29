@@ -23,10 +23,6 @@ export class AnswerService {
     return this.http.post<Answer>(`${this.apiUrl}/answers`, answer)
   }
 
-  getAnswersByUserId() {
-    
-  }
-
   updateAnswer(id: UUID | string, answer: Answer) {
     return this.http.put<Answer>(`${this.apiUrl}/answers/${id}`, answer)
   }

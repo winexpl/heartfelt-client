@@ -4,6 +4,24 @@ body {
   background-color: var(--background-color);
 }
 
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.action-button {
+  border: none;
+  size: 100px;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
+
+.search-field {
+  width:  100%;
+}
   
 .header {
   background-color: var(--primary-color);
@@ -65,7 +83,7 @@ body {
 .username {
   text-decoration: underline;
   display: block;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .nickname {
@@ -73,6 +91,11 @@ body {
   display: block;
   text-decoration: none;
   font-size: 20px;
+}
+
+.datetime {
+  text-align: right;
+  color: var(--secondary-color);
 }
 
 .card {

@@ -12,6 +12,10 @@ import { AuthService } from '../../auth/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UUID } from 'node:crypto';
 import { AnswerCardComponent } from "../../components/answer-card/answer-card.component";
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { QuestionCardComponent } from "../../components/question-card/question-card.component";
 
 @Component({
   selector: 'app-question-page',
@@ -19,6 +23,11 @@ import { AnswerCardComponent } from "../../components/answer-card/answer-card.co
     CommonModule,
     ReactiveFormsModule,
     AnswerCardComponent,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButtonModule,
+    QuestionCardComponent
 ],
   templateUrl: './question-page.component.html',
   styleUrl: './question-page.component.css'

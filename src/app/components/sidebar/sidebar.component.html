@@ -1,14 +1,45 @@
 <div class="sidebar__wrapper">
     <nav class="sidebar">
-        <ul>
-            <li><a [routerLink]=`${authService.username}` class="menu-link">Профиль</a></li>
-            <li><a routerLink="/questions" class="menu-link">Вопросы</a></li>
-            <li><a routerLink="/search" class="menu-link">Найти</a></li>
-            @if(authService.roles.includes(Role.ADMIN)) {
-                <li><a routerLink="/settings" class="menu-link">Заявки</a></li>
-                <li><a routerLink="/claims" class="menu-link">Жалобы</a></li>
-            }
-            <li><a routerLink="/settings" class="menu-link">Настройки</a></li>
-        </ul>
+      <ul>
+        <li>
+          <a [routerLink]=`${authService.username}` class="menu-link">
+            <mat-icon class="menu-icon">account_circle</mat-icon>
+            Профиль
+          </a>
+        </li>
+        <li>
+          <a routerLink="/questions" class="menu-link">
+            <mat-icon class="menu-icon">question_answer</mat-icon>
+            Вопросы
+          </a>
+        </li>
+        <li>
+          <a routerLink="/search" class="menu-link">
+            <mat-icon class="menu-icon">search</mat-icon>
+            Найти
+          </a>
+        </li>
+        @if(authService.roles.includes(Role.ADMIN)) {
+          <li>
+            <a routerLink="/settings" class="menu-link">
+              <mat-icon class="menu-icon">assignment</mat-icon>
+              Заявки
+            </a>
+          </li>
+          <li>
+            <a routerLink="/claims" class="menu-link">
+              <mat-icon class="menu-icon">report</mat-icon>
+              Жалобы
+            </a>
+          </li>
+        }
+        <li>
+          <a routerLink="/settings" class="menu-link">
+            <mat-icon class="menu-icon">settings</mat-icon>
+            Настройки
+          </a>
+        </li>
+      </ul>
     </nav>
-</div>
+  </div>
+  

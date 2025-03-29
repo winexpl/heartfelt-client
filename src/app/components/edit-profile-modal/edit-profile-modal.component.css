@@ -1,0 +1,27 @@
+.profile-edit-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: var(--background-secondary-color, #f9f9f9);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--border-color);
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 16px;
+    outline-color: var(--background-color);  
+}
+  
+.button-group {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
