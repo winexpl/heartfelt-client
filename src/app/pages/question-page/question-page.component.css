@@ -1,4 +1,6 @@
-
+app-answer-card {
+  transition: transform 0.3s ease;
+}
   
 .qa-card {
 background-color: var(--background-color);
@@ -58,4 +60,8 @@ background-color: var(--background-color);
 
 mat-raised-button {
   background-color: var(--primary-color);
+}
+
+.highlight {
+  transform: scale(1.03); 
 }

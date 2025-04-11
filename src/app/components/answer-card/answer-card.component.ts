@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal, effect } from '@angular/core';
+import { Component, inject, Input, signal, effect, Output, EventEmitter } from '@angular/core';
 import { Answer } from '../../interfaces/answer.interface';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../auth/auth.service';
@@ -6,6 +6,10 @@ import { AnswerService } from '../../services/answer.service';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+import { EditClaimModalComponent } from '../edit-claim-modal/edit-claim-modal.component';
+import { ClaimType } from '../../interfaces/claim.interface';
+import { WebSocketService } from '../../services/web-socket.service';
 
 @Component({
   selector: 'app-answer-card',
@@ -23,12 +27,14 @@ export class AnswerCardComponent {
   @Input() answer!: Answer;
   authService = inject(AuthService);
   answerService = inject(AnswerService);
+  dialog = inject(MatDialog)
+  webSocetService = inject(WebSocketService)
 
-  // Используем signal вместо обычной переменной
+  @Output() deletedAnswerId = new EventEmitter<string>();
+
   isEditMode = signal(false);
 
   constructor() {
-    // Реактивный эффект, который можно использовать для отладки
     effect(() => {
       console.log('isEditMode изменился:', this.isEditMode());
     });
@@ -38,8 +44,12 @@ export class AnswerCardComponent {
     const input = (event.target as HTMLInputElement).value; 
     this.isEditMode.set(false);
     if(input.length > 0) { 
-      this.answer.text = input;
-      this.answerService.updateAnswer(this.answer.id, this.answer).subscribe()
+      
+      this.answerService.updateAnswer(this.answer.id, this.answer).subscribe({
+        next: (answer) => {
+          this.answer.text = input;
+        }
+      })
     } 
   }
 
@@ -49,7 +59,16 @@ export class AnswerCardComponent {
 
   deleteAnswer() {
     this.answerService.deleteAnswer(this.answer.id).subscribe(
-      () => window.location.reload()
+      () => this.deletedAnswerId.emit(this.answer.id)
     )
   }
+
+  openModal(): void {
+    this.dialog.open(EditClaimModalComponent, {
+      width: '600px',
+      data: { answerId: this.answer.id, 
+        claimType: ClaimType.ANSWER, 
+        receiverId: this.answer.psychologistId },
+    });
+  }  
 }

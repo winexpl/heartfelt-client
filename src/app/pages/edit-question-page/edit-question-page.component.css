@@ -1,13 +1,25 @@
-.question-edit-form {
-    max-width: 900px;
-    margin: 20px;
-    padding: 20px;
-    background-color: var(--background-secondary-color);
+.form { 
+    width: 800px;
 }
 
-.h100 {
-    height: 100px;
-    resize: vertical; /* Разрешить изменение высоты */
+.edit-question__wrapper {
+    background-color: var(--background-color);
+    align-items: center; /* Вертикальное центрирование */
+
+}
+.edit-question-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-
+.edit-question-field {
+    width: 100%;
+}
+  
+mat-dialog-actions {
+    margin-top: 20px;
+}
+.form-content {
+    justify-content: center; /* Горизонтальное центрирование */
+}

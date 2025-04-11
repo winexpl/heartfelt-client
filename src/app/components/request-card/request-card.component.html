@@ -1,0 +1,15 @@
+<mat-card class="request-card">
+    <mat-card-content>
+        <div class="request">
+            <a class="username" [href]=`${request.username}`>&#64;{{ request.username }}</a>
+            <p class="nickname"><strong>{{ request.nickname }}</strong></p>
+            <p>{{ request.text }}</p>
+        </div>
+
+        <mat-card-actions style="gap: 8px;" align="end">
+            <button mat-stroked-button (click)="deleteRequest()">Отклонить</button>
+            <button mat-flat-button (click)="updateRole()">Выдать роль</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>
+  

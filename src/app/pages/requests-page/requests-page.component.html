@@ -1,0 +1,11 @@
+<div class="requests-list">
+    @for(r of requests; track r.id) {
+        <app-request-card 
+            [request]="r"
+            (deleted)="receiveDeletedRequest($event)"
+        ></app-request-card>
+    }
+    @empty {
+        <p class="no-content">Нет заявок</p>
+    }
+</div>

@@ -15,9 +15,9 @@ export class ReviewService {
   getAllReviewsByReceiverId(receiverId: UUID | string) {
     return this.http.get<Review[]>(`${this.apiUrl}/reviews`,
       {params: {
-          receiverId: receiverId
-        }
-      })
+        receiverId: receiverId
+      }
+    })
   }
 
   saveReview(review: any) {

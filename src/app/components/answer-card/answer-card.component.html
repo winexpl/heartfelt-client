@@ -8,10 +8,16 @@
           <mat-icon>delete</mat-icon>
         </button>
       </div>
+    } @else {
+      <div class="action-buttons">
+        <button mat-icon-button class="action-button" (click)="openModal()">
+          <mat-icon>flag</mat-icon>
+        </button>
+      </div>
     }
   
     <li class="no-marker">
-      <a class="username" [href]=`${answer.username}`>&#64;{{ answer.username }}</a>
+      <a class="username" [href]=`${answer.username}`><strong>&#64;{{ answer.username }}</strong></a>
     </li>
   
     @if(!isEditMode()) {

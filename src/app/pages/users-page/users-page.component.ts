@@ -28,4 +28,6 @@ export class UsersPageComponent {
     console.log(input)
     this.users$ = this.userService.getAllUsersByUsername(input)
   }
+
+  
 }

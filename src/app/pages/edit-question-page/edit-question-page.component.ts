@@ -6,12 +6,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../interfaces/question.interface';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { UUID } from 'crypto';
+import { EditClaimModalComponent } from '../../components/edit-claim-modal/edit-claim-modal.component';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-edit-question',
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    MatFormField,
+    MatLabel,
+    MatError,
+    MatInput,
+    MatCheckbox,
+    MatButton,
+    MatDialogActions,
+    MatDialogTitle,
+    MatDialogContent
   ],
   templateUrl: './edit-question-page.component.html',
   styleUrl: './edit-question-page.component.css'
@@ -19,53 +36,41 @@ import { Question } from '../../interfaces/question.interface';
 export class EditQuestionComponent {
   authService = inject(AuthService)
   userService = inject(UserService)
-  questionService = inject(QuestionService)
   router = inject(Router)
   fb = inject(FormBuilder)
-  activatedRoute = inject(ActivatedRoute)
+  dialogRef = inject(MatDialogRef<EditClaimModalComponent>)
   
-  question? : Question; 
+  public data: { question: Question } = inject(MAT_DIALOG_DATA)
+  question: Question = this.data.question;
 
   questionForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],
-    text: [''],
+    text: ['', Validators.required],
     anonymous: [false]
   }); 
 
-
   constructor() {
-    const questionId = this.activatedRoute.snapshot.paramMap.get('questionId')
-    if(questionId) {
-      this.questionService.getQuestionById(questionId).subscribe({
-        next: (response) => {
-          this.question = response;
-          this.initializeForm();
-        },
-        error: (error) => {
-          console.error('Ошибка загрузки вопроса:', error);
-          this.router.navigateByUrl('/questions')
-        }
-      })
-    }
+    if(this.question) this.initializeForm();
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
   onSubmit(): void {
-    const newQuestion = this.questionForm.value;
     if (this.questionForm.valid) {
-      if(this.question) {
-        this.questionService.updateQuestionById(this.question.id, newQuestion).subscribe()
-      } else {
-        console.log('Новый вопрос:', newQuestion);
-        this.questionService.saveQuestion(newQuestion).subscribe()
+      const newQuestion: Question = {
+        id: '',
+        userId: this.authService.id,
+        username: this.authService.username,
+        nickname: '',
+        title: '',
+        text: '',
+        createdAt: new Date() as unknown as DateTime,
+        anonymous: false
       }
-      this.router.navigateByUrl('/questions')
+      this.dialogRef.close({...newQuestion, ...this.questionForm.value});
     }
-  }
-
-  onCancel(): void {
-    console.log('Отмена редактирования');
-    this.router.navigateByUrl('/questions')
-
   }
 
   handleTab(event: KeyboardEvent): void {

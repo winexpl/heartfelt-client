@@ -33,7 +33,7 @@ export class QuestionService {
     return this.http.post<Question>(`${this.apiUrl}/questions`, question)
   }
 
-  deleteQuestion(id: UUID) {
+  deleteQuestion(id: UUID | string) {
     return this.http.delete(`${this.apiUrl}/questions/${id}`)
   }
 

@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   editPassword(payload: {oldPassword: string, newPassword: string}) {
-    return this.http.put(`${this.apiUrl}/edit_password`, payload)
+    return this.http.put(`${this.apiUrl}/edit_password`, payload, { responseType: 'text' })
   }
 
   register(payload: {username: string, password: string}) {

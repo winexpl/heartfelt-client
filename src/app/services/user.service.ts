@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Role, User } from '../interfaces/user.interface';
 import { UUID } from 'crypto';
 
@@ -54,5 +54,12 @@ export class UserService {
 
   updateUser(id: UUID | string, user: User) {
     return this.http.put<User>(`${this.apiUrl}/users/${id}`, user)
+  }
+
+  updateRole(id: UUID | string, role: Role) {
+    const params = new HttpParams()
+    .set('role', role);
+    return this.http.put<User>(`${this.apiUrl}/admin/role/${id}`, null,
+      { params })
   }
 }

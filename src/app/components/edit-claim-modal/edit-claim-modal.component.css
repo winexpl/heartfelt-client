@@ -1,0 +1,18 @@
+.complain__wrapper {
+    background-color: var(--background-color);
+
+}
+.complain-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+  
+.complain-field {
+    width: 90%;
+    margin: 16px;
+}
+  
+mat-dialog-actions {
+    margin-top: 20px;
+}

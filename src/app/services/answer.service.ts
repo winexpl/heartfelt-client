@@ -19,7 +19,7 @@ export class AnswerService {
     }})
   }
 
-  sendAnswer(answer: Answer) {
+  sendAnswer(answer: Answer | any) {
     return this.http.post<Answer>(`${this.apiUrl}/answers`, answer)
   }
 
@@ -29,5 +29,9 @@ export class AnswerService {
 
   deleteAnswer(id: UUID | string) {
     return this.http.delete(`${this.apiUrl}/answers/${id}`)
+  }
+
+  getAnswerById(id: UUID | string) {
+    return this.http.get<Answer>(`${this.apiUrl}/answers/${id}`)
   }
 }

@@ -1,0 +1,20 @@
+<div class="complain__wrapper">
+  <h1 mat-dialog-title class="complain-title">Отправка жалобы</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+      <mat-form-field class="complain-field" appearance="outline">
+        <mat-label>Текст жалобы</mat-label>
+        <textarea 
+          matInput 
+          placeholder="Введите текст жалобы"
+          formControlName="text">
+        </textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-stroked-button color="warn" (click)="close()">Отмена</button>
+      <button mat-flat-button  type="submit">Отправить</button>
+    </div>
+  </form>
+</div>
+

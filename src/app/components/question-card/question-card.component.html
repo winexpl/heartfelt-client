@@ -1,16 +1,16 @@
 <div class="question-card">
     @if(authService.id == question.userId) {
-      <div class="question-card-actions">
-        <button mat-icon-button class="action-btn" (click)="deleteQuestion()">
+      <div class="action-buttons">
+        <button mat-icon-button class="action-button" (click)="deleteQuestion()">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-icon-button class="action-btn" (click)="editQuestion()">
+        <button mat-icon-button class="action-button" (click)="editQuestion()">
           <mat-icon>edit</mat-icon>
         </button>
       </div>
     } @else {
-      <div class="question-card-actions">
-        <button mat-icon-button class="action-btn">
+      <div class="action-buttons">
+        <button mat-icon-button class="action-button" (click)="openModal()">
           <mat-icon>flag</mat-icon>
         </button>
       </div>
@@ -18,14 +18,15 @@
   
     @if(question.username && question.anonymous != true) {
       <div class="question-card-user">
-        <a class="username" [href]=`${question.username}`>&#64;{{ question.username }}</a>
+        <a class="username" 
+        (click)="this.router.navigateByUrl(`${this.question.username}`)">&#64;{{ question.username }}</a>
       </div>
     } @else {
       <div class="question-card-user">Анонимный вопрос</div>
     }
   
     <h2 class="question-card-title">
-      <a [href]="'questions/' + question.id">{{ question.title }}</a>
+      <a class="pointer" (click)="this.router.navigateByUrl('questions/' + this.question.id)">{{ question.title }}</a>
     </h2>
   
     <p class="question-card-text">{{ question.text }}</p>

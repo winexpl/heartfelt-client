@@ -1,60 +1,65 @@
 <form 
-    class="register-form" 
+    class="form" 
     [formGroup]="form"
     (ngSubmit)="onSubmit($event)"    
 >
     <h1 class="h1 mb60">Регистрация</h1>
 
-    <label class="tt-control-label mb16">
-        Логин
-        <input 
+
+    <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Имя пользователя</mat-label>
+        <input matInput 
             formControlName="username"
-            class="tt-input mt8" 
+            class="input mt8" 
             type="text" 
-            placeholder="Введите логин">
-    </label>
+            placeholder="Введите логин"/>
+    </mat-form-field>
 
-    <label class="tt-control-label mb16">
-        Пароль
-        <div class="password-input">
-            <input 
-                formControlName="password"
-                class="tt-input mt8" 
-                [type]="showPassword() ? 'text' : 'password'" 
-                placeholder="Введите пароль">
-            <button 
-                type="button" 
-                (click)="showPassword.set(!showPassword())" 
-                class="password-eye-btn">
-                <span class="material-icons">
-                    {{ showPassword() ? 'visibility_off' : 'visibility' }}
-                </span>
-            </button>
-        </div>
-    </label>
+    <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input matInput
+            formControlName="password"
+            class="input mt8" 
+            [type]="showPassword() ? 'text' : 'password'" 
+            placeholder="Введите пароль"/>
+        <button type="button" 
+            (click)="showPassword.set(!showPassword())" 
+            class="password-eye-btn">
+            <span class="material-icons">
+                {{ showPassword() ? "visibility_off" : "visibility" }}
+            </span>
+        </button>
+        @if(form.get('password')?.hasError('minlength')) {
+            <mat-error>
+                Пароль должен быть не менее {{ minPasswordLength }} символов
+            </mat-error>
+        }
+    </mat-form-field>
 
-    <label class="tt-control-label mb32">
-        Подтвердите пароль
-        <div class="password-input">
-            <input 
-                formControlName="confirmPassword"
-                class="tt-input mt8" 
-                [type]="showConfirmPassword() ? 'text' : 'password'" 
-                placeholder="Подтвердите пароль">
-            <button 
-                type="button" 
-                (click)="showConfirmPassword.set(!showConfirmPassword())" 
-                class="password-eye-btn">
-                <span class="material-icons">
-                    {{ showConfirmPassword() ? 'visibility_off' : 'visibility' }}
-                </span>
-            </button>
-        </div>
-    </label>
+    <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Повторите пароль</mat-label>
+        <input matInput
+            formControlName="confirmPassword"
+            class="input mt8" 
+            [type]="showConfirmPassword() ? 'text' : 'password'" 
+            placeholder="Введите пароль"/>
+        <button type="button" (click)="showConfirmPassword.set(!showConfirmPassword())" class="password-eye-btn">
+            <span class="material-icons">
+                {{ showConfirmPassword() ? "visibility_off" : "visibility" }}
+            </span>
+        </button>
+        @if(form.get('confirmPassword')?.hasError('passwordMismatch')) {
+            <mat-error>
+                Пароли не совпадают
+            </mat-error>
+        }
+    </mat-form-field>
+    
+    
 
     <button class="btn" type="submit">Зарегистрироваться</button>
 
     <label class="login-reg">Есть аккаунт?
-        <a href="/login" class="login-reg-link">Войти!</a>
+        <a href="/login" class="link">Войти!</a>
     </label>
 </form>

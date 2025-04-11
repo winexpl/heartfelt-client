@@ -43,14 +43,7 @@ button:hover {
     color: var(--primary-color);
 }
 
-.username {
-    text-decoration: none;
-    color: var(--hover-color);
-}
 
-.username:hover {
-    text-decoration: underline;
-}
 
 .question-card-title {
     margin: 8px 0;

@@ -1,8 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { AfterContentInit, AfterRenderRef, AfterViewChecked, AfterViewInit, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { Question } from '../../interfaces/question.interface';
 import { QuestionService } from '../../services/question.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, Subject, Subscription, switchMap, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Answer } from '../../interfaces/answer.interface';
 import { AnswerService } from '../../services/answer.service';
@@ -16,6 +16,8 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { QuestionCardComponent } from "../../components/question-card/question-card.component";
+import { WebSocketService } from '../../services/web-socket.service';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-question-page',
@@ -32,8 +34,10 @@ import { QuestionCardComponent } from "../../components/question-card/question-c
   templateUrl: './question-page.component.html',
   styleUrl: './question-page.component.css'
 })
-export class QuestionPageComponent {
+export class QuestionPageComponent implements OnInit, OnDestroy {
   Role=Role;
+  destroy$ = new Subject<void>(); 
+  
   answerService = inject(AnswerService)
   questionService = inject(QuestionService)
   userService = inject(UserService)
@@ -41,40 +45,73 @@ export class QuestionPageComponent {
   router = inject(Router)
   authService = inject(AuthService)
   fb = inject(FormBuilder)
+  scrolled = false
 
   textForm: FormGroup = this.fb.group({
     text: ['', [Validators.required]],
   })
 
   questionId!: UUID;
-  @Input() answerId?: UUID;
+  answerId?: UUID;
+  answers: Answer[] = []
+  question!: Question
 
-  constructor() { 
-    if(this.answerId) {
-      console.log('input', this.answerId);
-    }
-   }
-  
-  answers$: Observable<Answer[]> = this.activatedRoute.params.pipe(
-    switchMap(({ questionId }) => {
-      return this.answerService.getAnswersByQuestionId(questionId)
-    })
-  )
+  ngOnInit(): void {
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        this.answerId=params['answerId']
+      })
+    this.activatedRoute.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((params) => {
+        this.questionId = params['questionId']
+        this.questionService.getQuestionById(this.questionId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((question) =>
+            this.question = question
+          )
+        this.answerService.getAnswersByQuestionId(this.questionId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((answers) => {
+            this.answers = answers
+            const element = document.getElementById(`answer-${this.answerId}`);
+            console.log('ПРОКРУТКА', element, `answer-${this.answerId}`);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              element.classList.add('highlight'); // Добавляем класс подсветки
+              setTimeout(() => {
+                element.classList.remove('highlight'); // Убираем класс через 2 секунды
+              }, 2000);
+            }
+          })
+      })
+      
+  }
 
-  question$: Observable<Question> = this.activatedRoute.params.pipe(
-    switchMap(({ questionId }) => {
-      this.questionId = questionId;
-      return this.questionService.getQuestionById(questionId)
-    })
-  );
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-  onSubmit() {
+  onSubmit() {  
     if (this.textForm.valid) {
-      const answer = this.textForm.value;
-      const newAnswer = {...answer, questionId: this.questionId};
-      console.log('Текст для отправки:', newAnswer);
-      this.answerService.sendAnswer(newAnswer).subscribe(
-        () => window.location.reload());      
+      const answer = {
+        text: this.textForm.value.text,
+        questionId: this.question.id
+      };
+      console.log('Текст для отправки:', answer);
+      this.answerService.sendAnswer(answer).subscribe(
+        (answer) => {
+          this.answers.unshift({...answer, username: this.authService.username});
+          this.textForm.reset();
+        }
+      )    
     }
+  }
+
+  receiveDeletedAnswerId(deletedAnswerId: string | UUID) {
+    console.log("deletedAnswerId" + deletedAnswerId);
+    this.answers = this.answers.filter(a => a.id != deletedAnswerId)
   }
 }

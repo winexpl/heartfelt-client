@@ -1,4 +1,3 @@
-@if(question$ | async; as question ) {
     <div class="qa-card">
         <!-- <div class="question-section">
           <p class="username"><strong>{{ question.anonymous || question.username == null ? 'Анонимно' : question.username }}</strong></p>
@@ -18,20 +17,23 @@
           </form>
         }
       
-        @if(answers$ | async; as answers) {
           <p class="qa-title"><strong>Ответы:</strong></p>
           <div class="answers-section">
             @for(answer of answers; track answer.id) {
-              <app-answer-card [answer]="answer" class="answer-card"></app-answer-card>
+              <app-answer-card 
+              (deletedAnswerId)="receiveDeletedAnswerId($event)" 
+              [id]=`answer-${answer.id}` 
+              [answer]="answer" 
+              class="answer-card"></app-answer-card>
             } @empty {
               <div class="no-answer">
                 <p>На данный момент ответа на этот вопрос нет.</p>
               </div>
             }
           </div>
-        }
+        
       </div>
       
-}
+
 
   

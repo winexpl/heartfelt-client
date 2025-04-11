@@ -1,25 +1,27 @@
 <nav class="settings-menu">
     <ul class="settings-list">
       <li>
-        <button mat-button color="primary" (click)="navigateToEditProfile()">
+        <button mat-button class="btn" (click)="navigateToEditProfile()">
             {{ isOpenFormForEditProfile ? 'Закрыть форму без изменений' : 'Редактировать профиль' }}
         </button>
       </li>
   
       <li>
-        <button mat-button color="accent" (click)="navigateToEditPassword()">
+        <button mat-button class="btn" (click)="navigateToEditPassword()">
           {{ isOpenFormForEditPassword ? 'Закрыть форму без изменений' : 'Изменить пароль' }}
         </button>
       </li>
   
       @if(authService.roles.includes(Role.SUFFERY)) {
         <li>
-          <button mat-button color="accent">Стать психологом</button>
+          <button mat-button class="btn" (click)="navigateToEditRequest()">
+            {{ isOpenFormForEditRequest ? 'Закрыть форму без изменений' : 'Стать психологом' }}
+          </button>
         </li>
       }
   
       <li>
-        <button mat-button color="warn" (click)="logout()">Выход</button>
+        <button mat-button class="btn" (click)="logout()">Выход</button>
       </li>
     </ul>
 </nav>
@@ -27,10 +29,14 @@
 @if(isOpenFormForEditPassword) {
     <app-edit-password-modal></app-edit-password-modal>
 }
-
-
-@if(isOpenFormForEditProfile) {
-    <app-edit-profile-modal></app-edit-profile-modal>
+@else if(isOpenFormForEditProfile) {
+  <app-edit-profile-modal></app-edit-profile-modal>
+}
+@else if(isOpenFormForEditRequest) {
+  <app-edit-request-modal></app-edit-request-modal>
+}
+@else {
+  
 }
 
 

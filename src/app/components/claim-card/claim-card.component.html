@@ -1,7 +1,37 @@
-<div class="card">
-    <p>from: {{claim.senderUsername}}</p>
-    <p>to: {{claim.receiverUsername}}</p>
-    <a class="username ml16" [href]=`${navigateHref()}`>{{navigateString()}}</a>
-    <p>{{claim.refId}}</p>
-    <p>{{claim.text}}</p>
-</div>
+<mat-card class="claim-card">
+    <mat-card-header>
+        <mat-card-title>💼 Детали жалобы</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+        <p>
+            <strong>От:&nbsp;</strong>
+            <a 
+                (click)="navigateToSender()"
+                class="username">
+                &#64;{{ claim.senderUsername }}
+            </a>
+        </p>
+        <p>
+            <strong>На кого:&nbsp;</strong>
+            <a 
+                (click)="navigateToReceiver()"
+                class="username">
+                &#64;{{ claim.receiverUsername }}
+            </a>
+        </p>
+        <a class="link" (click)="navigateHref()">{{ navigateString() }}</a>
+        <p>
+            <strong>Текст жалобы:&nbsp;</strong> {{ claim.text }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+        <button mat-stroked-button (click)="deleteClaim()">Отклонить</button>
+        @if(claim.claimType == ClaimType.QUESTION) {
+            <button mat-flat-button (click)="deleteQuestion()">Удалить вопрос</button>
+        }
+        @if(claim.claimType == ClaimType.ANSWER) {
+            <button mat-flat-button (click)="deleteAnswer()">Удалить ответ</button>
+            <button mat-flat-button (click)="updateRoleAndDeleteAnswer()">Удалить и понизить роль</button>
+        }
+    </mat-card-actions>
+</mat-card>

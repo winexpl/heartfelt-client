@@ -1,6 +1,4 @@
-@if(user$ | async; as user) {
   <div class="profile-page">
-    <!-- Профиль -->
     <section class="profile-section">
       <h1>Профиль</h1>
       <div class="profile-details">
@@ -12,27 +10,27 @@
       </div>
     </section>
   
-    <!-- Вопросы -->
     @if(user.role.includes(Role.SUFFERY)) {
-      @if(questions$ | async; as questions) {
         <section class="questions-section">
           <h2>Мои вопросы</h2>
             @for(q of questions; track q.id) {
-              <app-question-card [question]="q"></app-question-card>
+              <app-question-card 
+                [question]="q"
+                (deleted)="receiveDeletedQuestion($event)"
+                (updated)="receiveUpdatedQuestion($event)"
+                ></app-question-card>
             }
             @empty {
               <p class="no-content">У матросов нет вопросов</p>
             }
         </section>
-      }
     }
   
-    <!-- Отзывы -->
     @if(user.role.includes(Role.PSYCHOLOG)) {
       <section class="reviews-section">
 
       @if(authService.roles.includes(Role.SUFFERY)) {
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="review-form">
+        <form [formGroup]="form" (ngSubmit)="createReview()" class="review-form">
           <mat-form-field appearance="outline" class="review-field">
             <mat-label>Введите ваш отзыв</mat-label>
             <textarea matInput formControlName="review"></textarea>
@@ -41,19 +39,20 @@
         </form>
       }
 
-      @if(reviews$ | async; as reviews) {
-          <h2>Отзывы</h2>
-          <div class="reviews-list">
-            @for(r of reviews; track r.id) {
-              <app-review-card [review]="r"></app-review-card>
-            }
-            @empty {
-              <p class="no-content">Отзывов пока что нет</p>
-            }
-          </div>
-      }
+      <h2>Отзывы</h2>
+      <div class="reviews-list">
+        @for(r of reviews; track r.id) {
+          <app-review-card 
+          [review]="r"
+          (deleted)="receiveDeletedReview($event)"></app-review-card>
+        }
+        @empty {
+          <p class="no-content">Отзывов пока что нет</p>
+        }
+      </div>
+      
     </section>
 
     }
   </div>
-}
+

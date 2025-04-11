@@ -3,8 +3,7 @@
         <div class="ask-btn">
             <button class="btn" (click)="navigateToCreateQuestion()">Задать вопрос</button>
         </div>
-    }
-      
+    } 
     <div class="m8">
         <mat-form-field class="search-field" appearance="outline">
             <mat-label>Введите текст</mat-label>
@@ -17,14 +16,13 @@
     
     <div class="questions-list__wrapper">
         <div class="questions-list">
-            @if(questions$ | async; as questions) {
             @for (q of questions; track q.id) {
-                <app-question-card [question]="q" class="question-card"></app-question-card>
+                <app-question-card (deleted)="handleDeleted($event)" [question]="q" class="question-card"></app-question-card>
             }
             @empty {
                 <p class="no-content">Нет доступных вопросов</p>
             }
-        }
+        
         </div>
     </div>
 </div>

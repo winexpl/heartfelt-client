@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { DateTime } from "luxon";
 
 export interface Answer {
-    id: UUID;
+    id: UUID | string;
     questionId: UUID;
     psychologistId: UUID;
     username: string;

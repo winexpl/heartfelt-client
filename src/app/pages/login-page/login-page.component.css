@@ -23,16 +23,3 @@
     font-weight: 400;
     margin-top: 10px;
 }
-
-.login-reg-link {
-    color: #007bff; /* Синий цвет для ссылки */
-    font-weight: 500;
-    text-decoration: none;
-    margin-left: 5px; /* Отступ от текста "Нет аккаунта?" */
-    transition: color 0.3s ease; /* Плавное изменение цвета */
-}
-
-.login-reg-link:hover {
-    color: #0056b3; /* Темно-синий цвет при наведении */
-    text-decoration: underline; /* Подчеркивание при наведении */
-}

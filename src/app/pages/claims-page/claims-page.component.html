@@ -1,5 +1,12 @@
-@if(claims$ | async; as claims) {
+<div class="claims-list">
     @for(claim of claims; track claim.id) {
-        <app-claim-card [claim]="claim"></app-claim-card>
+        <app-claim-card 
+            (deleted)="receiveDeletedClaim($event)"
+            [claim]="claim"
+        ></app-claim-card>
     }
-}
+    @empty {
+        <p class="no-content">Нет жалоб</p>
+    }
+
+</div>

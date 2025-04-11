@@ -13,6 +13,8 @@ import { EditQuestionComponent } from './pages/edit-question-page/edit-question-
 import { ClaimsPageComponent } from './pages/claims-page/claims-page.component';
 import { Role } from './interfaces/user.interface';
 import { EditProfileModalComponent } from './components/edit-profile-modal/edit-profile-modal.component';
+import { EditClaimModalComponent } from './components/edit-claim-modal/edit-claim-modal.component';
+import { RequestsPageComponent } from './pages/requests-page/requests-page.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginPageComponent },
@@ -23,7 +25,9 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'questions', pathMatch: 'full' },
             { path: 'questions', component: QuestionsPageComponent}, 
+            { path: 'requests', component: RequestsPageComponent },
             { path: 'questions/new', component: EditQuestionComponent },
+            { path: 'claim/new', component: EditClaimModalComponent },
             { path: 'search', component: UsersPageComponent },
             { path: 'settings', component: SettingsPageComponent }, 
             { path: 'edit', component: EditProfileModalComponent },

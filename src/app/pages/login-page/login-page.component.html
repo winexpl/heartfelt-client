@@ -4,45 +4,34 @@
     (ngSubmit)="onSubmit($event)"    
 >
     <h1 class="h1 mb60">Вход</h1>
-    <label class="tt-control-label mb16">
-        Логин
-        <input 
-        formControlName="username"
-        class="tt-input mt8" type="text" placeholder="Введите логин">
-    </label>
-    <div class="error-container mb16">
-        @if (form.get('username')?.invalid) {
-            <small class="error" *ngIf="form.get('username')?.errors?.['required']">
-                Введите пароль
-            </small>
-        }
-    </div>
+    <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Имя пользователя</mat-label>
+        <input matInput 
+            formControlName="username"
+            class="input mt8" 
+            type="text" 
+            placeholder="Введите логин"/>
+    </mat-form-field>
 
-    <label class="tt-control-label mb32">
-        Пароль
-        <div class="password-input">
-            <input 
-                formControlName="password"
-                class="tt-input mt8" 
-                [type]="showPassword() ? 'text' : 'password'" 
-                placeholder="Введите пароль">
-            <button type="button" (click)="this.showPassword.set(!this.showPassword())" class="password-eye-btn">
-                <span class="material-icons">
-                    {{ this.showPassword() ? 'visibility_off' : 'visibility' }}
-                </span>
-            </button>
-        </div>
-    </label>
-    <div class="error-container mb16">
-        @if (form.get('password')?.invalid) {
-            <small class="error" *ngIf="form.get('password')?.errors?.['required']">
-                Введите пароль
-            </small>
-        }
-    </div>
+    <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <input matInput
+            formControlName="password"
+            class="input mt8" 
+            [type]="showPassword() ? 'text' : 'password'" 
+            placeholder="Введите пароль"/>
+        <button type="button" 
+            (click)="showPassword.set(!showPassword())" 
+            class="password-eye-btn">
+            <span class="material-icons">
+                {{ showPassword() ? "visibility_off" : "visibility" }}
+            </span>
+        </button>
+    </mat-form-field>
+
     <button class="btn" type="submit">Войти</button>
 
     <label class="login-reg">Нет аккуанта?
-        <a href="/register" class="login-reg-link">Зарегистрироваться!</a>
+        <a href="/register" class="link">Зарегистрироваться!</a>
     </label>
 </form>

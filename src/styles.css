@@ -1,7 +1,18 @@
+html {
+  /* COLOR SYSTEM VARIABLES */
+  color-scheme: light; /* Change to `light dark` to automatically toggle between light and dark themes. */
+
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: var(--background-color);
+}
+
+.action-buttons-bottom {
+  display: flex;
+  gap: 8px;
 }
 
 .action-buttons {
@@ -80,10 +91,18 @@ body {
   cursor: pointer;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .username {
+  text-decoration: none;
+  color: var(--hover-color);
+  cursor: pointer;
+}
+
+.username:hover {
   text-decoration: underline;
-  display: block;
-  font-size: 16px;
 }
 
 .nickname {
@@ -109,14 +128,27 @@ body {
 }
 
 .input {
-  width: 100%; /* Полная ширина */
-  padding: 10px 15px; /* Внутренние отступы */
-  font-size: 16px; /* Размер шрифта */
-  font-family: Arial, sans-serif; /* Шрифт */
-  color: var(--border-color); /* Цвет текста */
-  background-color: var(--text-color); /* Цвет фона */
-  border: 1px solid var(--background-color);
+  width: 100%;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: var(--border-color);
   outline: none;
+}
+
+.form {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 16px;
+  outline-color: var(--background-color);  
 }
 
 .date {
@@ -140,11 +172,28 @@ body {
   height: 20px;
 }
 
+.password-input {
+  position: relative;
+}
+
 .password-eye-btn {
   cursor: pointer;
   position: absolute;
   background: none;
   border: none;
+}
+
+.link {
+  color: var(--primary-color); /* Синий цвет для ссылки */
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 5px; /* Отступ от текста "Нет аккаунта?" */
+  transition: color 0.3s ease; /* Плавное изменение цвета */
+}
+
+.link:hover {
+  color: var(--green-color); /* Темно-синий цвет при наведении */
+  text-decoration: underline; /* Подчеркивание при наведении */
 }
 
 html, body { height: 100%; }

@@ -1,0 +1,13 @@
+<div class="edit-request__wrapper">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill" class="text-field">
+            <mat-label>Почему вы хотите быть пcихологом?</mat-label>
+                <input matInput formControlName="text" type='text' placeholder="Расскажите о себе" />
+            <mat-error *ngIf="form.get('text')?.errors?.['required']">Ну напишите хоть что-то</mat-error>
+        </mat-form-field>
+        <div class="button-group">
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Отправить</button>
+        </div>
+    </form>
+</div>
+  

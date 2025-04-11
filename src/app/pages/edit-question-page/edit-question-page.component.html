@@ -1,50 +1,50 @@
-<div class="question-edit-form">
+<div class="edit-question__wrapper">
+    <h1 mat-dialog-title class="edit-question-title">Задайте вопрос</h1>
     <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
-        <label class="tt-control-label">
-            Заголовок вопроса:
-            <input 
-                class="tt-input mt8" 
-                type="title" 
-                formControlName="title" 
-                placeholder="Введите заголовок вопроса"
-            />
-        </label>
-        <div class="error-container mb16">
-            @if (questionForm.get('title')?.invalid) {
-                <small class="error" *ngIf="questionForm.get('title')?.errors?.['required']">
-                    Введите заголовок
-                </small>
-            }
-        </div>
-        
-        <label class="tt-control-label mb16">
-            Текст вопроса:
-            <textarea 
-                class="tt-input mt8 h100" 
-                formControlName="text" 
-                placeholder="Расскажите о своей проблеме"
-                (keydown)="handleTab($event)">
-            </textarea>
-        </label>
-        <label class="tt-control-label mb16">
-            Анонимно?
-            <input 
-                type="checkbox"
-                formControlName="anonymous" 
-                [value]="isAnonymous()">
-        </label>
-        
-        <button 
-            type="submit" 
-            class="btn mb16" 
-            [disabled]="!questionForm.valid">
-            Сохранить
-        </button>
-        <button 
-        type="button"
-        class="btn" 
-        (click)="onCancel()">
-            Отмена
-        </button>
-    </form>
+    <div mat-dialog-content class="form-content">
+
+    <mat-form-field class="edit-question-field" appearance="fill">
+        <mat-label>Заголовок вопроса</mat-label>
+        <input
+            matInput
+            type="text"
+            formControlName="title"
+            placeholder="Введите заголовок вопроса" />
+        @if(questionForm.get('title')?.hasError('required')) {
+            <mat-error>
+                Введите заголовок
+            </mat-error>
+        }
+    </mat-form-field>
+
+    <!-- Текст вопроса -->
+    <mat-form-field class="edit-question-field" appearance="fill">
+        <mat-label>Текст вопроса</mat-label>
+        <textarea
+            matInput
+            rows="5"
+            formControlName="text"
+            placeholder="Расскажите о своей проблеме"
+            (keydown)="handleTab($event)">
+        </textarea>
+        @if(questionForm.get('text')?.hasError('required')) {
+            <mat-error>
+                Расскажите о своей проблеме
+            </mat-error>
+        }
+
+    </mat-form-field>
+
+    <mat-checkbox 
+        class="mb8"
+        formControlName="anonymous">
+        Анонимно?
+    </mat-checkbox>
+
+    <div mat-dialog-actions align="end">
+        <button mat-stroked-button color="warn" (click)="close()">Отмена</button>
+        <button mat-flat-button  type="submit">Отправить</button>
+    </div>
+</div>
+</form>
 </div>

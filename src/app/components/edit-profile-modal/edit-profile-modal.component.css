@@ -13,12 +13,6 @@
     flex-direction: column;
     gap: 16px;
 }
-
-.form-field {
-    width: 100%;
-    margin-bottom: 16px;
-    outline-color: var(--background-color);  
-}
   
 .button-group {
     display: flex;

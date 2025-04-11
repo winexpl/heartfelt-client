@@ -1,0 +1,38 @@
+.claim-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.claim-card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); /* Эффект при наведении */
+}
+
+.link {
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+mat-card-actions {
+    margin: 8px;
+    gap: 8px
+}
+
+p {
+    display: flex;
+}
+
+a {
+    color: var(--hover-color);
+}

@@ -2,12 +2,14 @@ import { UUID } from "crypto";
 import { DateTime } from "luxon";
 
 export interface Claim {
+    [x: string]: any;
     id: UUID;
     senderId: UUID;
-    userId: UUID;
+    receiverId: UUID;
     text: string;
     createdAt: DateTime;
-    refId: UUID;
+    answerId: UUID;
+    questionId: UUID;
     claimType: ClaimType;
     senderUsername: string;
     receiverUsername: string;
